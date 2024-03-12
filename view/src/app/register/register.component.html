@@ -1,0 +1,46 @@
+<body class="bg-image">
+  <div id="wrapper">
+    <img src="assets/img/logo_text.png" alt="Travelo logo" id="logo">
+    <form>
+      <div class="same-row">
+        <div class="input-with-label">
+          <label for="fNameInput" class="form-label">First name:</label>
+          <input type="text" class="form-control" name="fNameInput" id="fNameInput" placeholder="Your first name">
+        </div>
+
+        <div class="input-with-label">
+          <label for="lNameInput" class="form-label">Last name:</label>
+          <input type="text" class="form-control" name="lNameInput" id="lNameInput" placeholder="Your last name">
+        </div>
+      </div>
+
+      <div class="same-row">
+        <div class="input-with-label">
+          <label for="usernameInput" class="form-label">Username:</label>
+          <input type="text" class="form-control" name="usernameInput" id="usernameInput" placeholder="Your username">
+        </div>
+
+        <div class="input-with-label">
+          <label for="emailInput" class="form-label">E-mail:</label>
+          <input type="email" class="form-control" name="emailInput" id="emailInput" placeholder="Your e-mail">
+        </div>
+      </div>
+
+      <div class="input-with-label">
+        <label for="passInput" class="form-label">Password:</label>
+        <input type="password" class="form-control" name="passInput" id="passInput" placeholder="Create your password">
+      </div>
+
+      <div class="input-with-label">
+        <label for="passConfInput" class="form-label">Confirm password:</label>
+        <input type="password" class="form-control" name="passConfInput" id="passConfInput" placeholder="Type your password again">
+      </div>
+
+      <div class="button-row">
+        <button type="button" class="btn btn-warning">Sign up</button>
+        <button type="reset" class="btn btn-light">Clear</button>
+      </div>
+    </form>
+    <p>Already have an account? <a routerLink="/login">Log in</a></p>
+  </div>
+</body>
