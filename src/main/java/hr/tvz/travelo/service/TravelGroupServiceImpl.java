@@ -13,17 +13,19 @@ public class TravelGroupServiceImpl implements TravelGroupService{
 
     private final TravelGroupRepository travelGroupRepository;
 
-    public TravelGroupServiceImpl(TravelGroupRepository travelGroupRepository) {
+    public TravelGroupServiceImpl (TravelGroupRepository travelGroupRepository){
         this.travelGroupRepository = travelGroupRepository;
     }
 
     @Override
-    public List<TravelGroupDTO> findAll() {
+    public List<TravelGroupDTO> findAll(){
         return travelGroupRepository.findAll().stream().map(this::mapTravelGroupToDTO).collect(Collectors.toList());
     }
 
     private TravelGroupDTO mapTravelGroupToDTO (TravelGroup travelGroup){
-        return new TravelGroupDTO
-                (travelGroup.getCode(), travelGroup.getName(), travelGroup.getCreatedAt(), travelGroup.getStatus(), travelGroup.getTripStart(), travelGroup.getTripEnd());
+        return new TravelGroupDTO(
+                travelGroup.getCode(), travelGroup.getName(), travelGroup.getCreatedAt(), travelGroup.getStatus(), travelGroup.getTripStart(), travelGroup.getTripEnd()
+        );
     }
+
 }

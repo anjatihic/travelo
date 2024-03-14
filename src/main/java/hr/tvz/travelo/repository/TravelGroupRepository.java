@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface TravelGroupRepository extends JpaRepository<TravelGroup, Long> {
+public interface TravelGroupRepository extends JpaRepository<TravelGroup, Long>{
     List<TravelGroup> findAll();
 }
