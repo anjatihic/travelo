@@ -2,10 +2,9 @@ package hr.tvz.travelo.controller;
 
 import hr.tvz.travelo.DTO.TravelGroupDTO;
 import hr.tvz.travelo.service.TravelGroupService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +21,17 @@ public class TravelGroupController {
     @CrossOrigin(origins = "http://localhost:4200")
     public List<TravelGroupDTO> getAllTravelGroups() {
         return travelGroupService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<TravelGroupDTO> getTravelGroupById(@PathVariable final Long id){
+        return travelGroupService.findById(id)
+                .map(
+                        travelGroupDTO -> ResponseEntity.status(HttpStatus.OK).body(travelGroupDTO)
+                )
+                .orElseGet(
+                        () -> ResponseEntity.notFound().build()
+                );
     }
 }

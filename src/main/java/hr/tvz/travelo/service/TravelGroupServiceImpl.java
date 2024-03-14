@@ -6,6 +6,7 @@ import hr.tvz.travelo.repository.TravelGroupRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,6 +21,11 @@ public class TravelGroupServiceImpl implements TravelGroupService{
     @Override
     public List<TravelGroupDTO> findAll(){
         return travelGroupRepository.findAll().stream().map(this::mapTravelGroupToDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<TravelGroupDTO> findById(Long id) {
+        return travelGroupRepository.findTravelGroupById(id).map(this::mapTravelGroupToDTO);
     }
 
     private TravelGroupDTO mapTravelGroupToDTO (TravelGroup travelGroup){
