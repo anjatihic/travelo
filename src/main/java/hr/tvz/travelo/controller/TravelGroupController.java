@@ -34,4 +34,16 @@ public class TravelGroupController {
                         () -> ResponseEntity.notFound().build()
                 );
     }
+
+    @GetMapping("/code{code}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<TravelGroupDTO> getTravelGroupByCode(@PathVariable final String code){
+        return travelGroupService.findByCode(code)
+                .map(
+                        travelGroupDTO -> ResponseEntity.status(HttpStatus.OK).body(travelGroupDTO)
+                )
+                .orElseGet(
+                        () -> ResponseEntity.notFound().build()
+                );
+    }
 }

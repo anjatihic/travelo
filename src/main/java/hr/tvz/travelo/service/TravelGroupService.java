@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface TravelGroupService {
     List<TravelGroupDTO> findAll();
     Optional<TravelGroupDTO> findById(Long id);
+    Optional<TravelGroupDTO> findByCode(String code);
 }

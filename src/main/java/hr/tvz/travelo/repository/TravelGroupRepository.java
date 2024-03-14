@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface TravelGroupRepository extends JpaRepository<TravelGroup, Long>{
     List<TravelGroup> findAll();
     Optional<TravelGroup> findTravelGroupById(Long id);
+    Optional<TravelGroup> findTravelGroupByCode(String code);
 }

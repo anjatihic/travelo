@@ -28,6 +28,11 @@ public class TravelGroupServiceImpl implements TravelGroupService{
         return travelGroupRepository.findTravelGroupById(id).map(this::mapTravelGroupToDTO);
     }
 
+    @Override
+    public Optional<TravelGroupDTO> findByCode(String code) {
+        return travelGroupRepository.findTravelGroupByCode(code).map(this::mapTravelGroupToDTO);
+    }
+
     private TravelGroupDTO mapTravelGroupToDTO (TravelGroup travelGroup){
         return new TravelGroupDTO(
                 travelGroup.getCode(), travelGroup.getName(), travelGroup.getCreatedAt(), travelGroup.getStatus(), travelGroup.getTripStart(), travelGroup.getTripEnd()
