@@ -18,7 +18,7 @@ body{
   backdrop-filter: blur(15px);
   border-radius: 5px;
   padding: 15px;
-  min-height: 90vh;
+  height: max-content;
 }
 
 .right-content{
