@@ -10,3 +10,28 @@ body{
   overflow-x: hidden;
   box-sizing: border-box;
 }
+
+.center-content{
+  width: 60%;
+  height: max-content;
+  background-color: #f6f2ff;
+  opacity: 85%;
+  backdrop-filter: blur(15px);
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.right-content{
+  width: 20%;
+}
+
+.left-content{
+  width: 20%;
+}
+
+h3{
+  font-weight: normal !important;
+  padding-bottom: 10px;
+  padding-top: 15px;
+  font-style: italic;
+}
