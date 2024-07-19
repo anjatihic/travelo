@@ -13,5 +13,18 @@ create table if not exists travel_group
     created_at date         not null,
     status     boolean      not null,
     trip_start date         not null,
-    trip_end   date         not null
+    trip_end   date         not null,
+    description varchar(700),
+    image_url varchar(400)
+);
+
+create table if not exists user_details
+(
+    id identity,
+    username varchar(50) not null unique,
+    f_name varchar(30) not null,
+    l_name varchar(40) not null,
+    email varchar(80) not null,
+    hash_pass varchar(500) not null,
+    created_at datetime not null
 );
