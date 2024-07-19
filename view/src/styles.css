@@ -2,3 +2,11 @@
 body{
   margin : 0;
 }
+
+.wrapper{
+  width: 100%;
+  height: max-content;
+  display: flex;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
