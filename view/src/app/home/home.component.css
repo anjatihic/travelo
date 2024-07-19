@@ -1,12 +1,14 @@
 .wrapper{
-  width: 100vw;
+  width: 100%;
   height: max-content;
   display: flex;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .center-content{
   width: 60%;
-  height: 92vh;
+  height: max-content;
   background-color: #f6f2ff;
   opacity: 85%;
   backdrop-filter: blur(15px);
@@ -36,6 +38,7 @@ h3{
   display: flex;
   justify-content: center;
   gap: 10px;
+  padding-bottom: 15px;
 }
 
 a{
@@ -69,6 +72,10 @@ a{
   background-color: #216B45;
   color: #f6f2ff;
   transition: background-color 0.7s, color 0.7s;
+}
+
+iframe{
+  margin-bottom: 15px;
 }
 
 
