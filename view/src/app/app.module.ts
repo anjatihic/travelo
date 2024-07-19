@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { NavigationComponent } from './shared/navigation/navigation.component';
 import { HomeComponent } from './home/home.component';
 import { NewGroupComponent } from './new-group/new-group.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NewGroupComponent } from './new-group/new-group.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

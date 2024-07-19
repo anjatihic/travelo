@@ -5,7 +5,7 @@ body{
 
 .wrapper{
   width: 100%;
-  height: max-content;
+  min-height: 95vh;
   display: flex;
   overflow-x: hidden;
   box-sizing: border-box;
@@ -13,12 +13,12 @@ body{
 
 .center-content{
   width: 60%;
-  height: max-content;
   background-color: #f6f2ff;
   opacity: 85%;
   backdrop-filter: blur(15px);
   border-radius: 5px;
   padding: 15px;
+  min-height: 90vh;
 }
 
 .right-content{
