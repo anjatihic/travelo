@@ -18,13 +18,22 @@ create table if not exists travel_group
     image_url varchar(400)
 );
 
-create table if not exists user_details
+create table if not exists users_info
 (
     id identity,
     username varchar(50) not null unique,
-    f_name varchar(30) not null,
-    l_name varchar(40) not null,
-    email varchar(80) not null,
-    hash_pass varchar(500) not null,
-    created_at datetime not null
+    email varchar(80) not null unique,
+    password varchar(500) not null
+);
+
+create table if not exists roles
+(
+    id identity,
+    name varchar(50) not null unique
+);
+
+create table if not exists users_authority
+(
+    user_id long not null,
+    role_id long not null
 );
