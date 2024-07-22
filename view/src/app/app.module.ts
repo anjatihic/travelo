@@ -8,7 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { NavigationComponent } from './shared/navigation/navigation.component';
 import { HomeComponent } from './home/home.component';
 import { NewGroupComponent } from './new-group/new-group.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -22,7 +22,8 @@ import {FormsModule} from "@angular/forms";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
