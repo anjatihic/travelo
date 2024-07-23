@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import Validation from "../utils/Validation";
+import {AuthService} from "../service/auth.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -18,8 +20,13 @@ export class RegisterComponent implements OnInit{
   });
 
   submitted = false;
+  isSuccessful = false;
+  isSignUpFailed = false;
+  errorMessage = '';
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private authService: AuthService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -27,8 +34,8 @@ export class RegisterComponent implements OnInit{
       {
         username: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(5)]],
-        confirmPassword: ['', [Validators.required, Validators.minLength(5)]]
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
       },
       {
         validators: [Validation.match('password', 'confirmPassword')]
@@ -50,7 +57,26 @@ export class RegisterComponent implements OnInit{
 
     console.log(JSON.stringify(this.form.value, null, 2));
 
-    //TODO: actually send the data to the back (through an authService)
+    const {username, email, password} = this.form.value;
+
+    this.authService.register({username, email, password}).subscribe({
+      next: data => {
+        console.log(data);
+        this.authService.login({username, password}).subscribe({
+          next: loginData => {
+            console.log(loginData);
+            this.isSuccessful = true;
+            this.isSignUpFailed = false;
+            this.router.navigate(['/home']);
+          }
+          }
+        )
+      },
+      error: err => {
+        this.errorMessage = err.error.message;
+        this.isSignUpFailed = true;
+      }
+    })
   }
 
   onReset(): void{
