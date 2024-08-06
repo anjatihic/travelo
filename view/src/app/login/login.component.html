@@ -1,13 +1,16 @@
 <body class="bg-image">
   <div id="wrapper">
     <img src="assets/img/logo_text.png" alt="Travelo logo" id="logo">
-    <form>
-      <input type="email" class="form-control" name="emailInput" id="emailInput" placeholder="E-mail">
+    <form
+    [formGroup]="form"
+    (ngSubmit)="onLogin()">
+      <input type="text" class="form-control" name="usernameInput" id="usernameInput" placeholder="Username"
+             [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" formControlName="username">
 
-      <input type="password" class="form-control" name="passInput" id="passInput" placeholder="Password">
+      <input type="password" class="form-control" name="passInput" id="passInput" placeholder="Password"
+             [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" formControlName="password">
 
-<!--      TODO: check what type of button it has to be for login-->
-      <button type="button" class="btn btn-warning">Log in</button>
+      <button type="submit" class="btn btn-warning">Log in</button>
     </form>
     <p>Don't have an account? <a routerLink="/register">Sign up</a></p>
   </div>

@@ -30,3 +30,10 @@ a:hover{
   flex-direction: row;
   justify-content: space-between;
 }
+
+.username{
+  margin-right: 20px;
+  color: white;
+  text-decoration: underline;
+  font-size: larger;
+}

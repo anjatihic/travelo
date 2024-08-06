@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable, tap} from "rxjs";
 import {SignupRequest} from "../model/SignupRequest";
 import {JwtResponse} from "../model/JwtResponse";
+import {jwtDecode} from "jwt-decode";
 
 
 @Injectable({
@@ -47,5 +48,33 @@ export class AuthService {
 
   getUsername(): string | null {
     return localStorage.getItem('auth-username');
+  }
+
+  isAuthenticated(): boolean {
+    const token = this.getToken();
+    if (token && !this.isTokenExpired(token)) {
+      return true;
+    } else {
+      this.logout();
+      return false;
+    }
+  }
+
+  isTokenExpired(token: string): boolean {
+    try {
+      const { exp } = jwtDecode<{ exp: number }>(token);
+      if (exp === undefined) {
+        return true;
+      }
+      return Date.now() > exp * 1000;
+    } catch (e) {
+      return true;
+    }
+  }
+
+  logout(): void {
+    this.http.post(this.authRootUrl + '/logout', {}, this.httpOptions).subscribe();
+    localStorage.removeItem('auth-token');
+    localStorage.removeItem('auth-username');
   }
 }
