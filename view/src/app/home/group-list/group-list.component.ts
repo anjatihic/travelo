@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {TravelGroupService} from "../../service/travel-group.service";
 import {TravelGroupResponse} from "../../model/TravelGroupResponse";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-group-list',
@@ -9,7 +10,7 @@ import {TravelGroupResponse} from "../../model/TravelGroupResponse";
 })
 export class GroupListComponent implements OnInit{
 
-  travelGroups: TravelGroupResponse[] = [];
+  @Input() travelGroups: TravelGroupResponse[] = [];
 
   constructor(private travelGroupService: TravelGroupService) {
   }
