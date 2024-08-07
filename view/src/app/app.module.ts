@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { NewGroupComponent } from './new-group/new-group.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { TravelGroupBoardComponent } from './travel-group-board/travel-group-board.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {HttpClientModule} from "@angular/common/http";
     RegisterComponent,
     NavigationComponent,
     HomeComponent,
-    NewGroupComponent
+    NewGroupComponent,
+    TravelGroupBoardComponent
   ],
   imports: [
     BrowserModule,

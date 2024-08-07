@@ -56,7 +56,8 @@ export class NewGroupComponent implements OnInit{
 
     this.travelGroupService.createNewTravelGroup({name, tripStart, tripEnd, description, coverImage}).subscribe({
       next: data => {
-        console.log(data);
+        this.isSuccessful = true;
+        this.router.navigate(['/travelGroup/' + data.code])
       },
       error: err => {
         this.errorMessage = err.error.message;
