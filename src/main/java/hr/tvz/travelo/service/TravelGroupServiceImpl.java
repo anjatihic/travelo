@@ -2,11 +2,16 @@ package hr.tvz.travelo.service;
 
 import hr.tvz.travelo.DTO.TravelGroupDTO;
 import hr.tvz.travelo.model.TravelGroup;
+import hr.tvz.travelo.model.User;
 import hr.tvz.travelo.repository.TravelGroupRepository;
+import hr.tvz.travelo.repository.UserRepository;
+import hr.tvz.travelo.security.request.TravelGroupRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -14,8 +19,11 @@ public class TravelGroupServiceImpl implements TravelGroupService{
 
     private final TravelGroupRepository travelGroupRepository;
 
-    public TravelGroupServiceImpl (TravelGroupRepository travelGroupRepository){
+    private final UserRepository userRepository;
+
+    public TravelGroupServiceImpl (TravelGroupRepository travelGroupRepository, UserRepository userRepository){
         this.travelGroupRepository = travelGroupRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -33,10 +41,56 @@ public class TravelGroupServiceImpl implements TravelGroupService{
         return travelGroupRepository.findTravelGroupByCode(code).map(this::mapTravelGroupToDTO);
     }
 
+    @Override
+    public Optional<TravelGroupDTO> post(TravelGroupRequest travelGroupRequest) {
+        TravelGroup travelGroup = populateModel(travelGroupRequest);
+
+        Set<User> users = travelGroupRequest.getUserIds().stream()
+                .map(userId -> userRepository.findById(userId).orElse(null))
+                .collect(Collectors.toSet());
+
+        travelGroup.setUsers(users);
+
+        TravelGroup savedTravelGroup = travelGroupRepository.save(travelGroup);
+
+        TravelGroupDTO travelGroupDTO = mapTravelGroupToDTO(savedTravelGroup);
+
+        return Optional.of(travelGroupDTO);
+
+    }
+
     private TravelGroupDTO mapTravelGroupToDTO (TravelGroup travelGroup){
-        return new TravelGroupDTO(
-                travelGroup.getCode(), travelGroup.getName(), travelGroup.getCreatedAt(), travelGroup.getStatus(), travelGroup.getTripStart(), travelGroup.getTripEnd()
-        );
+        TravelGroupDTO travelGroupDTO = new TravelGroupDTO(travelGroup.getCode(), travelGroup.getName(), travelGroup.getCreatedAt(), travelGroup.getStatus(), travelGroup.getTripStart(), travelGroup.getTripEnd(),
+                travelGroup.getDescription(), travelGroup.getDescription(), new HashSet<>());
+
+        travelGroupDTO.setUsersIds(travelGroup.getUsers().stream()
+                .map(User::getId)
+                .collect(Collectors.toSet()));
+
+        return travelGroupDTO;
+    }
+
+    private TravelGroup populateModel(TravelGroupRequest travelGroupRequest) {
+        TravelGroup travelGroup = new TravelGroup();
+
+        travelGroup.setName(travelGroupRequest.getName());
+        travelGroup.setTripStart(travelGroupRequest.getTripStart());
+        travelGroup.setTripEnd(travelGroupRequest.getTripEnd());
+
+        if(travelGroupRequest.getDescription() != null) {
+            travelGroup.setDescription(travelGroupRequest.getDescription());
+        } else {
+            travelGroup.setDescription("");
+        }
+
+        if(travelGroupRequest.getImage() != null) {
+            travelGroup.setImage(travelGroupRequest.getImage());
+        } else {
+            travelGroup.setImage("");
+        }
+
+        return travelGroup;
+
     }
 
 }

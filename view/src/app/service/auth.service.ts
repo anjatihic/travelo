@@ -29,6 +29,7 @@ export class AuthService {
         if (response && response.token) {
           this.saveToken(response.token);
           this.saveUsername(response.username);
+          this.saveUserId(response.id)
         }
       })
     )
@@ -45,6 +46,14 @@ export class AuthService {
   saveUsername(username: string): void {
     localStorage.setItem('auth-username', username);
   }
+
+  saveUserId(userId: number): void {
+    localStorage.setItem('auth-user-id', userId.toString());
+  }
+
+  getUserId(): string | null {
+    return localStorage.getItem('auth-user-id');
+}
 
   getUsername(): string | null {
     return localStorage.getItem('auth-username');
@@ -76,5 +85,6 @@ export class AuthService {
     this.http.post(this.authRootUrl + '/logout', {}, this.httpOptions).subscribe();
     localStorage.removeItem('auth-token');
     localStorage.removeItem('auth-username');
+    localStorage.removeItem('auth-user-id');
   }
 }

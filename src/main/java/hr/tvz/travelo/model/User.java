@@ -41,6 +41,14 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(
+            name = "travel_group_users",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "travel_group_id")
+    )
+    private Set<TravelGroup> travelGroups = new HashSet<>();
+
     public User() {
     }
 
@@ -48,5 +56,15 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public void addTravelGroup(TravelGroup travelGroup) {
+        this.travelGroups.add(travelGroup);
+        travelGroup.getUsers().add(this);
+    }
+
+    public void removeTravelGroup(TravelGroup travelGroup) {
+        this.travelGroups.remove(travelGroup);
+        travelGroup.getUsers().remove(this);
     }
 }
