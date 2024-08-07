@@ -15,7 +15,7 @@ create table if not exists travel_group
     trip_start date         not null,
     trip_end   date         not null,
     description varchar(700),
-    image_url varchar(400)
+    image varchar(400)
 );
 
 create table if not exists users_info
@@ -36,4 +36,10 @@ create table if not exists users_authority
 (
     user_id long not null,
     role_id long not null
+);
+
+create table if not exists travel_group_users
+(
+    travel_group_id long not null,
+    user_id long not null
 );
