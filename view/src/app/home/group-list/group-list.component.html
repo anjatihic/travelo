@@ -1,0 +1,13 @@
+<h3 *ngIf="travelGroups.length > 0">Your groups are waiting for you...</h3>
+<ol class="list-group list-group-numbered">
+  <li *ngFor="let group of travelGroups" class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">(((Group name)))</div>
+      Content for list item
+    </div>
+    <span class="badge text-bg-warning rounded-pill">((active or not ((add ngif))</span>
+  </li>
+
+</ol>
+
+<h4 *ngIf="travelGroups.length === 0">“I haven’t been everywhere, but it’s on my list.” – Susan Sontag</h4>
