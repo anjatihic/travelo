@@ -74,7 +74,7 @@ public class TravelGroupServiceImpl implements TravelGroupService{
     }
 
     private TravelGroupDTO mapTravelGroupToDTO (TravelGroup travelGroup){
-        TravelGroupDTO travelGroupDTO = new TravelGroupDTO(travelGroup.getCode(), travelGroup.getName(), travelGroup.getCreatedAt(), travelGroup.getStatus(), travelGroup.getTripStart(), travelGroup.getTripEnd(),
+        TravelGroupDTO travelGroupDTO = new TravelGroupDTO(travelGroup.getId(),travelGroup.getCode(), travelGroup.getName(), travelGroup.getCreatedAt(), travelGroup.getStatus(), travelGroup.getTripStart(), travelGroup.getTripEnd(),
                 travelGroup.getDescription(), travelGroup.getDescription(), new HashSet<>());
 
         travelGroupDTO.setUsersIds(travelGroup.getUsers().stream()
