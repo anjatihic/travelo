@@ -86,3 +86,9 @@
   font-style: italic;
   font-size: larger;
 }
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
