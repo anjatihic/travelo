@@ -10,10 +10,18 @@
 
     <div *ngIf="loadedGroup">
       <div class="title-content">
-        <h2>
-          {{loadedGroup.name}}
-        </h2>
+        <div>
+          <h2>
+            {{loadedGroup.name}}
+          </h2>
+          <p class="description">{{loadedGroup.description}}</p>
+          <p>{{loadedGroup.tripStart | date}} - {{loadedGroup.tripEnd | date}}</p>
+        </div>
+
+        <img src="assets/img/sampleTravelGroup.png" alt="cover image" class="img-fluid">
       </div>
+
+      <hr>
     </div>
 
   </div>
