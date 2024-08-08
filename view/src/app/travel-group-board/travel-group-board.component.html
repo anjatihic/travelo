@@ -1,5 +1,13 @@
 <div class="wrapper">
-  <div class="left-content">
+  <div class="left-content card text-center" style="width: 18rem;">
+    <div class="card-header">
+      Group members:
+    </div>
+    <div class="card-body">
+      <ul class="list-group">
+        <li *ngFor="let id of loadedGroup?.usersIds" class="list-group-item">{{id}}</li>
+      </ul>
+    </div>
   </div>
 
   <div class="center-content">
@@ -37,7 +45,7 @@
     <div class="right-content card text-center" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title">Group code:</h5>
-        <p class="card-text">{{loadedGroup?.code}}</p>
+        <p id="code-text" class="card-text">{{loadedGroup?.code}}</p>
       </div>
       <div class="card-footer text-body-secondary">
         Share this code with others so they can join the group
