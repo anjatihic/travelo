@@ -3,9 +3,9 @@
   <li *ngFor="let group of travelGroups" class="list-group-item d-flex justify-content-between align-items-start">
     <div class="ms-2 me-auto">
       <div class="fw-bold">{{group.name}}</div>
-      {{group.tripStart}} - {{group.tripEnd}}
+      {{group.tripStart | date}} - {{group.tripEnd | date}}
     </div>
-    <span *ngIf="group.status" class="badge text-bg-success rounded-pill">Upcoming</span>
+    <span class="badge text-bg-success rounded-pill">Active</span>
     <span class="badge text-bg-danger rounded-pill">Past</span>
   </li>
 
