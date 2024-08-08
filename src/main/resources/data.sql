@@ -1,5 +1,8 @@
 insert into plan_type (NAME, STATUS)
-values ('Accommodation', 1);
+values ('Accommodation', true),
+       ('Transportation', true),
+       ('Question', true),
+       ('Other', true);
 
 INSERT INTO ROLES(NAME)
 values ( 'ROLE_USER' ),
