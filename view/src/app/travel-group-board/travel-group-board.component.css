@@ -94,3 +94,17 @@
   margin-bottom: 20px;
 }
 
+.right-content{
+  background-color: #f6f2ff;
+  opacity: 85%;
+  backdrop-filter: blur(15px);
+  height: fit-content;
+  margin-top: 15px;
+  width: fit-content;
+  margin-right: 10px;
+}
+
+.card-text{
+  font-size: 2em;
+  color: #444444;
+}
