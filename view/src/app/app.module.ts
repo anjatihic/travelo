@@ -12,6 +12,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { TravelGroupBoardComponent } from './travel-group-board/travel-group-board.component';
 import { GroupListComponent } from './home/group-list/group-list.component';
+import { PostComponent } from './travel-group-board/post/post.component';
+import { NewPostComponent } from './travel-group-board/new-post/new-post.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { GroupListComponent } from './home/group-list/group-list.component';
     HomeComponent,
     NewGroupComponent,
     TravelGroupBoardComponent,
-    GroupListComponent
+    GroupListComponent,
+    PostComponent,
+    NewPostComponent
   ],
   imports: [
     BrowserModule,

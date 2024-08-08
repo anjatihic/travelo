@@ -11,6 +11,7 @@ import {TravelGroupResponse} from "../model/TravelGroupResponse";
 export class TravelGroupBoardComponent implements OnInit{
   groupId = '';
   loadedGroup: TravelGroupResponse | undefined;
+  newPostOpened = false;
 
   constructor(private travelGroupService: TravelGroupService,
               private router: Router) {
@@ -21,6 +22,14 @@ export class TravelGroupBoardComponent implements OnInit{
     this.travelGroupService.getTravelGroupById(this.groupId).subscribe( travelGroup =>  {
       this.loadedGroup = travelGroup;
     });
+  }
+
+  onNewPost() {
+    this.newPostOpened = true;
+  }
+
+  onNewPostCancel() {
+    this.newPostOpened = false;
   }
 
 }

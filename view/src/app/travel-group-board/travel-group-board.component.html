@@ -24,9 +24,12 @@
 
       <div class="post-header">
         <h4>Posts:</h4>
-        <button type="button" class="btn btn-warning">New post</button>
-
+        <button *ngIf="!newPostOpened" (click)="onNewPost()" type="button" class="btn btn-warning">New post</button>
+        <button *ngIf="newPostOpened" (click)="onNewPostCancel()" type="button" class="btn btn-warning">Cancel</button>
       </div>
+
+      <app-new-post *ngIf="newPostOpened"></app-new-post>
+      <app-post></app-post>
     </div>
 
   </div>
