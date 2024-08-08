@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable, tap} from "rxjs";
+import {BehaviorSubject, Observable, tap} from "rxjs";
 import {TravelGroupResponse} from "../model/TravelGroupResponse";
 import {AuthService} from "./auth.service";
+import {group} from "@angular/animations";
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,28 @@ export class TravelGroupService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  private travelGroupsSubject = new BehaviorSubject<TravelGroupResponse[]>([]);
+  travelGroups$ = this.travelGroupsSubject.asObservable();
+
   constructor(private http: HttpClient,
               private authService: AuthService) { }
+
+
+
+  loadTravelGroupsByUserId() {
+    const bearerToken = this.authService.getToken();
+    const options = {
+      headers: this.httpOptions.headers.set('Authorization', `Bearer ${bearerToken}`)
+    };
+    const userId = this.authService.getUserId();
+
+    this.http.get<TravelGroupResponse[]>(`${this.rootUrl}/user/${userId}`, options).pipe(
+      tap(groups => {
+        this.travelGroupsSubject.next(groups);
+      })
+    ).subscribe();
+
+  }
 
   createNewTravelGroup(groupInfo: {name: string, tripStart: Date, tripEnd: Date, description: string, coverImage: string}):
     Observable<TravelGroupResponse> {
@@ -30,7 +51,6 @@ export class TravelGroupService {
       userIds: [userId]
     }
 
-    // figure out hod to call properly
     return this.http.post<TravelGroupResponse>(this.rootUrl, groupInfoWithUserId, options).pipe(
       tap(response => {
           console.log('Response from createNewTravelGroup:', response);

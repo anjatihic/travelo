@@ -1,17 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "../service/auth.service";
 import {TravelGroupResponse} from "../model/TravelGroupResponse";
 import {TravelGroupService} from "../service/travel-group.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit, OnDestroy{
   todayDate = new Date()
   loggedInUser: string | null;
   travelGroups: TravelGroupResponse[] = [];
+  private subscription: Subscription | undefined;
 
   constructor(private authService: AuthService,
               private travelGroupService: TravelGroupService) {
@@ -19,9 +21,21 @@ export class HomeComponent implements OnInit{
   }
 
   ngOnInit() {
+    this.travelGroupService.loadTravelGroupsByUserId();
+    this.subscription = this.travelGroupService.travelGroups$.subscribe(
+      (groups) => {
+        this.travelGroups = groups;
+        console.log('Updated travel groups:', this.travelGroups);
+      },
+      (error) => {
+        console.error('Error subscribing to travel groups:', error);
+      }
+    );
+  }
 
-    //add correct method
-    this.travelGroupService.getAllUserGroups().subscribe(
-      groups => this.travelGroups = groups)
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
