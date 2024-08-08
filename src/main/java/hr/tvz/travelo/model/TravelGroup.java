@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,7 +22,6 @@ public class TravelGroup {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //make auto-generated??
     private String code;
 
     @NotBlank
