@@ -60,4 +60,12 @@ public class TravelGroupController {
                         () -> ResponseEntity.status(HttpStatus.CONFLICT).build()
                 );
     }
+
+    @GetMapping("/user/{userId}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<List<TravelGroupDTO>> getTravelGroupsByUserId(@PathVariable Long userId) {
+        return travelGroupService.findTravelGroupsByUserId(userId)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 }

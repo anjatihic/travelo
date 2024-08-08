@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
@@ -16,10 +17,11 @@ import java.util.Set;
 @Entity
 @AllArgsConstructor
 @Table(name = "travel_group")
+@EqualsAndHashCode(of = "id")
 public class TravelGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     //make auto-generated??
     private String code;
@@ -67,4 +69,5 @@ public class TravelGroup {
         return code.toString();
 
     }
+
 }

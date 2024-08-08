@@ -6,6 +6,7 @@ import hr.tvz.travelo.model.User;
 import hr.tvz.travelo.repository.TravelGroupRepository;
 import hr.tvz.travelo.repository.UserRepository;
 import hr.tvz.travelo.security.request.TravelGroupRequest;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -42,6 +43,7 @@ public class TravelGroupServiceImpl implements TravelGroupService{
     }
 
     @Override
+    @Transactional
     public Optional<TravelGroupDTO> post(TravelGroupRequest travelGroupRequest) {
         TravelGroup travelGroup = populateModel(travelGroupRequest);
 
@@ -53,10 +55,22 @@ public class TravelGroupServiceImpl implements TravelGroupService{
 
         TravelGroup savedTravelGroup = travelGroupRepository.save(travelGroup);
 
+        users.forEach(user -> user.addTravelGroup(savedTravelGroup));
+
         TravelGroupDTO travelGroupDTO = mapTravelGroupToDTO(savedTravelGroup);
 
         return Optional.of(travelGroupDTO);
 
+    }
+
+    @Override
+    public Optional<List<TravelGroupDTO>> findTravelGroupsByUserId(Long userId) {
+        return userRepository.findById(userId).map(user -> {
+            List<TravelGroupDTO> travelGroups = user.getTravelGroups().stream()
+                    .map(this::mapTravelGroupToDTO)
+                    .collect(Collectors.toList());
+            return travelGroups;
+        });
     }
 
     private TravelGroupDTO mapTravelGroupToDTO (TravelGroup travelGroup){

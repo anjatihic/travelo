@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +17,7 @@ import java.util.Set;
                 @UniqueConstraint(columnNames = "email")
         })
 @Data
+@EqualsAndHashCode(of = "id")
 public class User {
 
     @Id
@@ -67,4 +69,10 @@ public class User {
         this.travelGroups.remove(travelGroup);
         travelGroup.getUsers().remove(this);
     }
+
+    @Override
+    public String toString() {
+        return "User{id=" + id + ", username='" + username + "'}";
+    }
+
 }
