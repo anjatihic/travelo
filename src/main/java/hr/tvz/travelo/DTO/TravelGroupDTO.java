@@ -9,6 +9,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 public class TravelGroupDTO {
+    private Long id;
     private String code;
     private String name;
     private Date createdAt;
