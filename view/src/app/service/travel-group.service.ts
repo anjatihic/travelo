@@ -3,7 +3,6 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, Observable, tap} from "rxjs";
 import {TravelGroupResponse} from "../model/TravelGroupResponse";
 import {AuthService} from "./auth.service";
-import {group} from "@angular/animations";
 
 @Injectable({
   providedIn: 'root'
@@ -56,5 +55,19 @@ export class TravelGroupService {
           console.log('Response from createNewTravelGroup:', response);
       })
     )
+  }
+
+  getTravelGroupById(groupId: string) {
+    const bearerToken = this.authService.getToken();
+    const options = {
+      headers: this.httpOptions.headers.set('Authorization', `Bearer ${bearerToken}`)
+    };
+
+    return this.http.get<TravelGroupResponse>(`${this.rootUrl}/${groupId}`, options).pipe(
+      tap(response => {
+        console.log('Response from getGroupById:', response);
+      })
+    )
+
   }
 }

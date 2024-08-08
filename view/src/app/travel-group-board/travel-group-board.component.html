@@ -4,6 +4,17 @@
   </div>
 
   <div class="center-content">
+    <div *ngIf="!loadedGroup" class="lds-grid">
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <div *ngIf="loadedGroup">
+      <div class="title-content">
+        <h2>
+          {{loadedGroup.name}}
+        </h2>
+      </div>
+    </div>
 
   </div>
 
