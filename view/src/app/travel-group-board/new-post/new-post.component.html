@@ -1,1 +1,51 @@
-<p>new-post works!</p>
+<form [formGroup]="form" (ngSubmit)="onPost()">
+  <div class="input-with-label">
+    <label for="planType" class="form-label">Plan Type:</label>
+    <select class="form-select" aria-label="Plan type select" name="planType" id="planType" formControlName="planType">
+      <option value="" disabled selected>Select plan type</option>
+      <option *ngFor="let planType of activePlanTypes" [value]="planType.id">{{planType.name}}</option>
+    </select>
+  </div>
+
+  <div class="input-with-label">
+    <label for="title" class="form-label">Title:</label>
+    <input
+    formControlName="title" [ngClass]="{ 'is-invalid': submitted && f['title'].errors }"
+    type="text" class="form-control" name="title" id="title" placeholder="Title">
+  </div>
+
+  <div class="input-with-label">
+    <label for="content" class="form-label">Content:</label>
+    <textarea formControlName="content"
+              class="form-control" placeholder="Write the content of your post" id="content" name="content"
+              [ngClass]="{ 'is-invalid': submitted && f['content'].errors }"></textarea>
+  </div>
+
+  <div class="same-row">
+    <div class="input-with-label">
+      <label for="plannedStart" class="form-label">Start of the plan:</label>
+      <input formControlName="plannedStart" [ngClass]="{ 'is-invalid': submitted && f['plannedStart'].errors }"
+      class="form-control" placeholder="yyyy-mm-dd" name="plannedStart" type="date" id="plannedStart">
+    </div>
+
+    <div class="input-with-label">
+      <label for="plannedEnd" class="form-label">End of the plan:</label>
+      <input formControlName="plannedEnd" [ngClass]="{ 'is-invalid': submitted && f['plannedEnd'].errors }"
+             class="form-control" placeholder="yyyy-mm-dd" name="plannedEnd" type="date" id="plannedEnd">
+    </div>
+  </div>
+
+  <div class="input-with-label">
+    <label for="url" class="form-label">URL:</label>
+    <input
+      formControlName="url" [ngClass]="{ 'is-invalid': submitted && f['url'].errors }"
+      type="url" class="form-control" name="url" id="url" placeholder="Web link">
+  </div>
+
+  <div class="button-row">
+    <button type="submit" class="btn btn-success">Post</button>
+    <button type="reset" class="btn btn-warning">Clear</button>
+  </div>
+
+  <hr>
+</form>
