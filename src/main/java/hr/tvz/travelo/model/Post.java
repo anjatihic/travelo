@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 
 @Entity
@@ -40,6 +41,11 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "plan_type_id")
     private PlanType planType;
+
+    private Date plannedDate;
+    private String title;
+    private String url;
+
 
     public Post() {
         this.createdAt = LocalDateTime.now();

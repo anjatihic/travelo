@@ -53,6 +53,9 @@ create table if not exists post
     poster_id long not null,
     group_id long not null,
     plan_type_id long not null,
+    planned_date date,
+    title varchar(100),
+    url varchar(1000),
     constraint fk_poster foreign key (poster_id) references users_info(id),
     constraint fk_group foreign key (group_id) references travel_group(id),
     constraint fk_plan_type foreign key (plan_type_id) references plan_type(id)
