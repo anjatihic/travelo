@@ -1,6 +1,7 @@
 package hr.tvz.travelo.service;
 
 import hr.tvz.travelo.DTO.TravelGroupDTO;
+import hr.tvz.travelo.DTO.UserDTO;
 import hr.tvz.travelo.security.request.TravelGroupRequest;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface TravelGroupService {
     Optional<List<TravelGroupDTO>> findTravelGroupsByUserId(Long userId);
 
     Optional<TravelGroupDTO> addUserToTravelGroup(Long userId, String travelGroupCode);
+
+    Optional<UserDTO> findUserById(Long userId);
 }

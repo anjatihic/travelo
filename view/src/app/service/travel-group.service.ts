@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {BehaviorSubject, Observable, tap} from "rxjs";
+import {BehaviorSubject, forkJoin, Observable, tap} from "rxjs";
 import {TravelGroupResponse} from "../model/TravelGroupResponse";
 import {AuthService} from "./auth.service";
+import {UserResponse} from "../model/UserResponse";
 
 @Injectable({
   providedIn: 'root'
@@ -87,4 +88,22 @@ export class TravelGroupService {
     )
 
   }
+
+  getUsersByIds(userIds: number[]): Observable<UserResponse[]> {
+    const bearerToken = this.authService.getToken();
+    const options = {
+      headers: this.httpOptions.headers.set('Authorization', `Bearer ${bearerToken}`)
+    };
+
+    const requests = userIds.map( userId =>
+    this.http.get<UserResponse>(`${this.rootUrl}/getUser/${userId}`, options));
+
+    return forkJoin(requests).pipe(
+      tap(users => {
+        console.log('\'Response from getUsersByIds:\', users');
+      })
+    )
+  }
+
+
 }

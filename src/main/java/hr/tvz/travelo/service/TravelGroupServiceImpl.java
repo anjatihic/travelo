@@ -1,11 +1,13 @@
 package hr.tvz.travelo.service;
 
 import hr.tvz.travelo.DTO.TravelGroupDTO;
+import hr.tvz.travelo.DTO.UserDTO;
 import hr.tvz.travelo.model.TravelGroup;
 import hr.tvz.travelo.model.User;
 import hr.tvz.travelo.repository.TravelGroupRepository;
 import hr.tvz.travelo.repository.UserRepository;
 import hr.tvz.travelo.security.request.TravelGroupRequest;
+import hr.tvz.travelo.security.response.JwtResponse;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -96,6 +98,11 @@ public class TravelGroupServiceImpl implements TravelGroupService{
 
     }
 
+    @Override
+    public Optional<UserDTO> findUserById(Long userId) {
+        return userRepository.findById(userId).map(this::mapUserToDTO);
+    }
+
     private TravelGroupDTO mapTravelGroupToDTO (TravelGroup travelGroup){
         TravelGroupDTO travelGroupDTO = new TravelGroupDTO(travelGroup.getId(),travelGroup.getCode(), travelGroup.getName(), travelGroup.getCreatedAt(), travelGroup.getStatus(), travelGroup.getTripStart(), travelGroup.getTripEnd(),
                 travelGroup.getDescription(), travelGroup.getDescription(), new HashSet<>());
@@ -128,6 +135,14 @@ public class TravelGroupServiceImpl implements TravelGroupService{
 
         return travelGroup;
 
+    }
+
+    private UserDTO mapUserToDTO(User user) {
+        Set<Long> travelGroupIds = user.getTravelGroups().stream()
+                .map(TravelGroup::getId)
+                .collect(Collectors.toSet());
+
+        return new UserDTO(user.getId(), user.getUsername(), user.getEmail(), travelGroupIds);
     }
 
 }

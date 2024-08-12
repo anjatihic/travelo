@@ -1,6 +1,7 @@
 package hr.tvz.travelo.controller;
 
 import hr.tvz.travelo.DTO.TravelGroupDTO;
+import hr.tvz.travelo.DTO.UserDTO;
 import hr.tvz.travelo.security.request.TravelGroupRequest;
 import hr.tvz.travelo.service.TravelGroupService;
 import jakarta.validation.Valid;
@@ -76,6 +77,18 @@ public class TravelGroupController {
                 .map(
                         travelGroupDTO -> ResponseEntity.status(HttpStatus.OK).body(travelGroupDTO)
                 ).orElseGet(
+                        () -> ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+                );
+    }
+
+    @GetMapping("/getUser/{userId}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long userId) {
+        return travelGroupService.findUserById(userId)
+                .map(
+                        userDTO -> ResponseEntity.status(HttpStatus.OK).body(userDTO)
+                )
+                .orElseGet(
                         () -> ResponseEntity.status(HttpStatus.NOT_FOUND).build()
                 );
     }

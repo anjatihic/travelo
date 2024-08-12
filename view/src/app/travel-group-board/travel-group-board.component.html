@@ -5,7 +5,7 @@
     </div>
     <div class="card-body">
       <ul class="list-group">
-        <li *ngFor="let id of loadedGroup?.usersIds" class="list-group-item">{{id}}</li>
+        <li *ngFor="let user of userDetails" class="list-group-item">{{user.username}}</li>
       </ul>
     </div>
   </div>
