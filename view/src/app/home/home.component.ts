@@ -3,6 +3,8 @@ import {AuthService} from "../service/auth.service";
 import {TravelGroupResponse} from "../model/TravelGroupResponse";
 import {TravelGroupService} from "../service/travel-group.service";
 import {Subscription} from "rxjs";
+import {FormControl, FormGroup} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -15,8 +17,13 @@ export class HomeComponent implements OnInit, OnDestroy{
   travelGroups: TravelGroupResponse[] = [];
   private subscription: Subscription | undefined;
 
+  groupCode = '';
+
+  joinSuccessful = false;
+
   constructor(private authService: AuthService,
-              private travelGroupService: TravelGroupService) {
+              private travelGroupService: TravelGroupService,
+              private router: Router) {
     this.loggedInUser = this.authService.getUsername();
   }
 
@@ -31,6 +38,22 @@ export class HomeComponent implements OnInit, OnDestroy{
         console.error('Error subscribing to travel groups:', error);
       }
     );
+  }
+
+  onJoinGroup() {
+    if (this.groupCode) {
+      this.travelGroupService.addUserToGroup(this.groupCode).subscribe({
+        next: data => {
+          this.joinSuccessful = true;
+          this.router.navigate(['/travelGroup/' + data.id]);
+        },
+        error: err => {
+          console.log(err.error.message);
+        }
+      });
+    } else {
+      console.error('No group code provided!');
+    }
   }
 
   ngOnDestroy() {

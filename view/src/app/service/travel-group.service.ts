@@ -70,4 +70,21 @@ export class TravelGroupService {
     )
 
   }
+
+  addUserToGroup(travelGroupCode: string) {
+    const bearerToken = this.authService.getToken();
+    const userId = this.authService.getUserId();
+    const options = {
+      headers: this.httpOptions.headers.set('Authorization', `Bearer ${bearerToken}`)
+    };
+
+    console.log(travelGroupCode)
+
+    return this.http.post<TravelGroupResponse>(`${this.rootUrl}/${travelGroupCode}/addUser/${userId}`,null, options).pipe(
+      tap(group => {
+        console.log('Response from addUserToGroup:', group)
+      })
+    )
+
+  }
 }
