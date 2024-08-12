@@ -3,3 +3,7 @@ h4{
   font-weight: normal;
   text-align: center;
 }
+
+.list-group-item {
+  cursor: pointer; /* Change cursor to pointer on hover */
+}

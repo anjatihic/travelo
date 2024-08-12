@@ -12,10 +12,14 @@ export class GroupListComponent implements OnInit{
 
   @Input() travelGroups: TravelGroupResponse[] = [];
 
-  constructor(private travelGroupService: TravelGroupService) {
+  constructor(private travelGroupService: TravelGroupService, private router: Router) {
   }
 
   ngOnInit() {
+  }
+
+  navigateToGroup(groupId: number) {
+    this.router.navigate([`/travelGroup/${groupId}`]);
   }
 
 }
