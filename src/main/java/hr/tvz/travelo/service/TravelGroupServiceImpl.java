@@ -73,6 +73,29 @@ public class TravelGroupServiceImpl implements TravelGroupService{
         });
     }
 
+    @Override
+    @Transactional
+    public Optional<TravelGroupDTO> addUserToTravelGroup(Long userId, String travelGroupCode) {
+        Optional<TravelGroup> travelGroupOptional = travelGroupRepository.findTravelGroupByCode(travelGroupCode);
+        if(travelGroupOptional.isEmpty()) {
+            return Optional.empty();
+        }
+
+        Optional<User> userOptional = userRepository.findById(userId);
+        if(userOptional.isEmpty()) {
+            return Optional.empty();
+        }
+
+        TravelGroup travelGroup = travelGroupOptional.get();
+        User user = userOptional.get();
+
+        user.addTravelGroup(travelGroup);
+        userRepository.save(user);
+
+        return Optional.of(mapTravelGroupToDTO(travelGroup));
+
+    }
+
     private TravelGroupDTO mapTravelGroupToDTO (TravelGroup travelGroup){
         TravelGroupDTO travelGroupDTO = new TravelGroupDTO(travelGroup.getId(),travelGroup.getCode(), travelGroup.getName(), travelGroup.getCreatedAt(), travelGroup.getStatus(), travelGroup.getTripStart(), travelGroup.getTripEnd(),
                 travelGroup.getDescription(), travelGroup.getDescription(), new HashSet<>());

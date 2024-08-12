@@ -68,4 +68,15 @@ public class TravelGroupController {
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @PostMapping("/{travelGroupCode}/addUser/{userId}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<TravelGroupDTO> addUserToTravelGroup(@PathVariable String travelGroupCode, @PathVariable Long userId) {
+        return travelGroupService.addUserToTravelGroup(userId, travelGroupCode)
+                .map(
+                        travelGroupDTO -> ResponseEntity.status(HttpStatus.OK).body(travelGroupDTO)
+                ).orElseGet(
+                        () -> ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+                );
+    }
 }

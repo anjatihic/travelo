@@ -14,4 +14,6 @@ public interface TravelGroupService {
     Optional<TravelGroupDTO> post(TravelGroupRequest travelGroupRequest);
 
     Optional<List<TravelGroupDTO>> findTravelGroupsByUserId(Long userId);
+
+    Optional<TravelGroupDTO> addUserToTravelGroup(Long userId, String travelGroupCode);
 }
