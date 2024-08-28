@@ -17,17 +17,9 @@ public class PostDTO {
     private Long groupId;
     private Long planTypeId;
 
-    private Date plannedDate;
+    private Date plannedDateStart;
+    private Date plannedDateEnd;
     private String title;
     private String url;
 
-    public PostDTO(Long id, String content, LocalDateTime createdAt, boolean status, String posterUsername, Long groupId, Long planTypeId) {
-        this.id = id;
-        this.content = content;
-        this.createdAt = createdAt;
-        this.status = status;
-        this.posterUsername = posterUsername;
-        this.groupId = groupId;
-        this.planTypeId = planTypeId;
-    }
 }

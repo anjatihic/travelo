@@ -42,7 +42,8 @@ public class Post {
     @JoinColumn(name = "plan_type_id")
     private PlanType planType;
 
-    private Date plannedDate;
+    private Date plannedStart;
+    private Date plannedEnd;
     private String title;
     private String url;
 

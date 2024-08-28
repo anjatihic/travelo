@@ -20,7 +20,8 @@ public class PostRequest {
     @NotNull
     private Long planTypeId;
 
-    private Date plannedDate;
+    private Date plannedDateStart;
+    private Date plannedDateEnd;
     private String title;
     private String url;
 }
