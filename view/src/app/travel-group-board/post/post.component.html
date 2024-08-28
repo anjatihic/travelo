@@ -1,4 +1,4 @@
-<div *ngFor="let post of posts" class="card">
+<div *ngFor="let post of posts; let i = index" class="card">
   <div class="card-body">
     <app-card-badge [planTypeId]="post.planTypeId"></app-card-badge>
     <div class="card-header">
@@ -13,14 +13,14 @@
 
     <hr>
 
-    <div class="accordion" id="accordionExample">
+    <div class="accordion" id="accordionExample {{i}}">
       <div class="accordion-item">
         <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseTwo-' + i" aria-expanded="false" [attr.aria-controls]="'collapseTwo-' + i">
             Comments:
           </button>
         </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+        <div [id]="'collapseTwo-' + i" class="accordion-collapse collapse" [attr.data-bs-parent]="'#accordionExample-' + i">
           <div class="accordion-body">
             <ul class="list-group list-group-flush">
               <li class="list-group-item">An item</li>
