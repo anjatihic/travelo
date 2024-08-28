@@ -61,6 +61,6 @@ public class CommentServiceImpl implements CommentService {
     }
 
     private CommentDTO mapCommentToDTO(Comment comment) {
-        return new CommentDTO(comment.getId(), comment.getContent(), comment.getCreatedAt(), comment.getPost().getId(), comment.getCommenter().getId());
+        return new CommentDTO(comment.getId(), comment.getContent(), comment.getCreatedAt(), comment.getPost().getId(), comment.getCommenter().getUsername());
     }
 }

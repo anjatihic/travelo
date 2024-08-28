@@ -16,6 +16,8 @@ import { PostComponent } from './travel-group-board/post/post.component';
 import { NewPostComponent } from './travel-group-board/new-post/new-post.component';
 import { CardBadgeComponent } from './travel-group-board/post/card-badge/card-badge.component';
 import { CardLinkComponent } from './travel-group-board/post/card-link/card-link.component';
+import { CommentsComponent } from './travel-group-board/post/comments/comments.component';
+import { NewCommentComponent } from './travel-group-board/post/comments/new-comment/new-comment.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { CardLinkComponent } from './travel-group-board/post/card-link/card-link
     PostComponent,
     NewPostComponent,
     CardBadgeComponent,
-    CardLinkComponent
+    CardLinkComponent,
+    CommentsComponent,
+    NewCommentComponent
   ],
   imports: [
     BrowserModule,
