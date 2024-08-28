@@ -3,6 +3,7 @@ import {PlanTypeResponse} from "../../model/PlanTypeResponse";
 import {Subscription} from "rxjs";
 import {PostService} from "../../service/post.service";
 import {AbstractControl, FormControl, FormGroup} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-new-post',
@@ -14,11 +15,11 @@ export class NewPostComponent implements OnInit, OnDestroy{
   private planTypesSubscription: Subscription | undefined;
 
   form: FormGroup = new FormGroup({
-    planType: new FormControl(''),
+    planTypeId: new FormControl(''),
     title: new FormControl(''),
     content: new FormControl(''),
-    plannedStart: new FormControl(''),
-    plannedEnd: new FormControl(''),
+    plannedDateStart: new FormControl(''),
+    plannedDateEnd: new FormControl(''),
     url: new FormControl('')
   });
 
@@ -27,7 +28,7 @@ export class NewPostComponent implements OnInit, OnDestroy{
   isSubmitFailed = false;
   errorMessage = '';
 
-  constructor(private postService: PostService) {
+  constructor(private postService: PostService, private router: Router) {
   }
 
   ngOnInit() {
@@ -48,6 +49,28 @@ export class NewPostComponent implements OnInit, OnDestroy{
   }
 
   onPost() {
+    this.submitted = true;
+    if(this.form.invalid) {
+      return;
+    }
+
+    const {planTypeId, title, content, plannedDateStart, plannedDateEnd, url} = this.form.value;
+    const groupId = parseInt(this.router.url.split('/')[2]);
+
+    console.log({planTypeId, title, content, plannedDateStart, plannedDateEnd, url})
+
+    this.postService.newPost({planTypeId, title, content, plannedDateStart, plannedDateEnd, url}, groupId).subscribe(
+      {
+        next: data => {
+          this.isSuccessful = true;
+          this.form.reset();
+        },
+        error: err => {
+          this.errorMessage = err.error.message;
+          this.isSuccessful = false;
+        }
+      }
+    )
 
   }
 

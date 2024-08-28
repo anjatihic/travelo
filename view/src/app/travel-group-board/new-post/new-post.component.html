@@ -3,7 +3,7 @@
   <h4>New post</h4>
   <div class="input-with-label">
     <label for="planType" class="form-label">Plan Type:</label>
-    <select class="form-select" aria-label="Plan type select" name="planType" id="planType" formControlName="planType">
+    <select class="form-select" aria-label="Plan type select" name="planType" id="planType" formControlName="planTypeId">
       <option value="" disabled selected>Select plan type</option>
       <option *ngFor="let planType of activePlanTypes" [value]="planType.id">{{planType.name}}</option>
     </select>
@@ -26,13 +26,13 @@
   <div class="same-row">
     <div class="input-with-label">
       <label for="plannedStart" class="form-label">Start of the plan:</label>
-      <input formControlName="plannedStart" [ngClass]="{ 'is-invalid': submitted && f['plannedStart'].errors }"
+      <input formControlName="plannedDateStart" [ngClass]="{ 'is-invalid': submitted && f['plannedStart'].errors }"
       class="form-control" placeholder="yyyy-mm-dd" name="plannedStart" type="date" id="plannedStart">
     </div>
 
     <div class="input-with-label">
       <label for="plannedEnd" class="form-label">End of the plan:</label>
-      <input formControlName="plannedEnd" [ngClass]="{ 'is-invalid': submitted && f['plannedEnd'].errors }"
+      <input formControlName="plannedDateEnd" [ngClass]="{ 'is-invalid': submitted && f['plannedEnd'].errors }"
              class="form-control" placeholder="yyyy-mm-dd" name="plannedEnd" type="date" id="plannedEnd">
     </div>
   </div>

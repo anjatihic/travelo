@@ -8,8 +8,19 @@ import java.util.Date;
 
 @Data
 public class PostRequest {
+    @NotNull
+    private Long planTypeId;
+
+    private String title;
+
     @NotBlank
     private String content;
+
+    private Date plannedDateStart;
+
+    private Date plannedDateEnd;
+
+    private String url;
 
     @NotNull
     private Long posterId;
@@ -17,11 +28,5 @@ public class PostRequest {
     @NotNull
     private Long groupId;
 
-    @NotNull
-    private Long planTypeId;
 
-    private Date plannedDateStart;
-    private Date plannedDateEnd;
-    private String title;
-    private String url;
 }
