@@ -11,7 +11,9 @@ import hr.tvz.travelo.security.request.CommentRequest;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -36,6 +38,11 @@ public class CommentServiceImpl implements CommentService {
         CommentDTO commentDTO = mapCommentToDTO(savedComment);
 
         return Optional.of(commentDTO);
+    }
+
+    @Override
+    public List<CommentDTO> findByPostId(Long postId) {
+        return commentRepository.findAllByPostId(postId).stream().map(this::mapCommentToDTO).collect(Collectors.toList());
     }
 
 
