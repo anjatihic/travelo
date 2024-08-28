@@ -15,6 +15,7 @@ import { GroupListComponent } from './home/group-list/group-list.component';
 import { PostComponent } from './travel-group-board/post/post.component';
 import { NewPostComponent } from './travel-group-board/new-post/new-post.component';
 import { CardBadgeComponent } from './travel-group-board/post/card-badge/card-badge.component';
+import { CardLinkComponent } from './travel-group-board/post/card-link/card-link.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CardBadgeComponent } from './travel-group-board/post/card-badge/card-ba
     GroupListComponent,
     PostComponent,
     NewPostComponent,
-    CardBadgeComponent
+    CardBadgeComponent,
+    CardLinkComponent
   ],
   imports: [
     BrowserModule,

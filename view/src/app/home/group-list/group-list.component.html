@@ -4,7 +4,8 @@
       class="list-group-item d-flex justify-content-between align-items-start">
     <div class="ms-2 me-auto">
       <div class="fw-bold">{{group.name}}</div>
-      {{group.tripStart | date}} - {{group.tripEnd | date}}
+      <span *ngIf="group.tripStart == group.tripEnd">{{group.tripStart | date}}</span>
+      <span *ngIf="group.tripStart != group.tripEnd">{{group.tripStart | date}} - {{group.tripEnd | date}}</span>
     </div>
     <span class="badge text-bg-success rounded-pill">Active</span>
     <span class="badge text-bg-danger rounded-pill">Past</span>

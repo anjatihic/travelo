@@ -5,7 +5,11 @@
       <h6 class="card-subtitle mb-1 text-body-secondary">{{post.posterUsername}}</h6>
       <h6 class="card-subtitle mb-1 text-body-secondary">{{post.createdAt | date}}</h6>
     </div>
+    <h5 class="card-title">{{post.title}}</h5>
+    <h6 *ngIf="post.plannedDateEnd != post.plannedDateStart" class="card-subtitle mb-2 text-body-secondary">{{post.plannedDateStart | date}} - {{post.plannedDateEnd | date}}</h6>
+    <h6 *ngIf="post.plannedDateEnd == post.plannedDateStart" class="card-subtitle mb-2 text-body-secondary">{{post.plannedDateStart | date}}</h6>
     <p class="card-text">{{post.content}}</p>
+    <app-card-link [url]="post.url"></app-card-link>
 
     <hr>
 

@@ -28,7 +28,8 @@
             {{loadedGroup.name}}
           </h2>
           <p class="description">{{loadedGroup.description}}</p>
-          <p>{{loadedGroup.tripStart | date}} - {{loadedGroup.tripEnd | date}}</p>
+          <p *ngIf="loadedGroup.tripStart != loadedGroup.tripEnd">{{loadedGroup.tripStart | date}} - {{loadedGroup.tripEnd | date}}</p>
+          <p *ngIf="loadedGroup.tripStart == loadedGroup.tripEnd">{{loadedGroup.tripStart | date}}</p>
         </div>
 
         <img src="assets/img/sampleTravelGroup.png" alt="cover image" class="img-fluid">
