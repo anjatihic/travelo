@@ -3,7 +3,7 @@
     <app-card-badge [planTypeId]="post.planTypeId"></app-card-badge>
     <div class="card-header">
       <h6 class="card-subtitle mb-1 text-body-secondary">{{post.posterUsername}}</h6>
-      <h6 class="card-subtitle mb-1 text-body-secondary">{{post.createdAt | date}}</h6>
+      <h6 class="card-subtitle mb-1 text-body-secondary">{{post.createdAt | date: 'H:mm - d/M/Y'}}</h6>
     </div>
     <h5 class="card-title">{{post.title}}</h5>
     <h6 *ngIf="post.plannedDateEnd != post.plannedDateStart" class="card-subtitle mb-2 text-body-secondary">{{post.plannedDateStart | date}} - {{post.plannedDateEnd | date}}</h6>
