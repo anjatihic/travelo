@@ -61,3 +61,14 @@ create table if not exists post
     constraint fk_group foreign key (group_id) references travel_group(id),
     constraint fk_plan_type foreign key (plan_type_id) references plan_type(id)
 );
+
+create table if not exists comment
+(
+    id identity,
+    content varchar(200) not null,
+    created_at timestamp not null,
+    commenter_id long not null,
+    post_id long not null,
+    constraint fk_commenter foreign key (commenter_id) references users_info(id),
+    constraint fk_post foreign key (post_id) references post(id)
+);

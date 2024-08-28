@@ -10,4 +10,6 @@ public interface PostService {
     Optional<PostDTO> post(PostRequest postRequest);
 
     List<PostDTO> findByGroupId(Long groupId);
+
+    Optional<PostDTO> findById(Long postId);
 }
