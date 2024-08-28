@@ -78,6 +78,10 @@ export class TravelGroupBoardComponent implements OnInit, OnDestroy{
     if (this.usersSubscription) {
       this.usersSubscription.unsubscribe();
     }
+
+    if(this.postsSubscription) {
+      this.postsSubscription.unsubscribe();
+    }
   }
 
 }

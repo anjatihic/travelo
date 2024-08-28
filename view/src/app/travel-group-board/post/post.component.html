@@ -1,10 +1,10 @@
-<div class="card">
+<div *ngFor="let post of posts" class="card">
   <div class="card-body">
     <div class="card-header">
-      <h6 class="card-subtitle mb-1 text-body-secondary">((username))</h6>
-      <h6 class="card-subtitle mb-1 text-body-secondary">((datum))</h6>
+      <h6 class="card-subtitle mb-1 text-body-secondary">{{post.posterUsername}}</h6>
+      <h6 class="card-subtitle mb-1 text-body-secondary">{{post.createdAt | date}}</h6>
     </div>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <p class="card-text">{{post.content}}</p>
 
     <hr>
 

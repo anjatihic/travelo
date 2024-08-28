@@ -45,7 +45,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<PostDTO> findByGroupId(Long groupId) {
-        return postRepository.findByTravelGroupId(groupId).stream().map(this::mapPostToDTO).collect(Collectors.toList());
+        return postRepository.findAllByTravelGroupId(groupId).stream().map(this::mapPostToDTO).collect(Collectors.toList());
     }
 
     private Post populateModel(PostRequest postRequest) {

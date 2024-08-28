@@ -43,7 +43,7 @@
       </div>
 
       <app-new-post *ngIf="newPostOpened"></app-new-post>
-      <app-post></app-post>
+      <app-post *ngIf="posts.length > 0"></app-post>
     </div>
 
   </div>
