@@ -44,6 +44,7 @@
 
       <app-new-post *ngIf="newPostOpened"></app-new-post>
       <app-post *ngIf="posts.length > 0"></app-post>
+      <h4 *ngIf="posts.length === 0">Looks like there is no posts yet. Create a new one!</h4>
     </div>
 
   </div>

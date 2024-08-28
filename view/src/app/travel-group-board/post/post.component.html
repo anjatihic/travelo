@@ -1,5 +1,6 @@
 <div *ngFor="let post of posts" class="card">
   <div class="card-body">
+    <app-card-badge [planTypeId]="post.planTypeId"></app-card-badge>
     <div class="card-header">
       <h6 class="card-subtitle mb-1 text-body-secondary">{{post.posterUsername}}</h6>
       <h6 class="card-subtitle mb-1 text-body-secondary">{{post.createdAt | date}}</h6>
