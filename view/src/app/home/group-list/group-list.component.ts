@@ -11,7 +11,6 @@ import {Router} from "@angular/router";
 export class GroupListComponent implements OnInit{
 
   @Input() travelGroups: TravelGroupResponse[] = [];
-
   constructor(private travelGroupService: TravelGroupService, private router: Router) {
   }
 
