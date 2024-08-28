@@ -18,6 +18,9 @@ export class PostService {
   private activePlanTypesSubject = new BehaviorSubject<PlanTypeResponse[]>([]);
   activePlanTypes$ = this.activePlanTypesSubject.asObservable();
 
+  private specificGroupPostsSubject = new BehaviorSubject<PostResponse[]>([]);
+  specificGroupPosts$ = this.specificGroupPostsSubject.asObservable();
+
   constructor(private http: HttpClient,
               private authService: AuthService) { }
 

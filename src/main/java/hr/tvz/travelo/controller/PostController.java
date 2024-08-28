@@ -41,4 +41,10 @@ public class PostController {
                 );
     }
 
+    @GetMapping("/{groupId}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public List<PostDTO> getAllPostsByGroupId(@PathVariable Long groupId) {
+        return postService.findByGroupId(groupId);
+    }
+
 }

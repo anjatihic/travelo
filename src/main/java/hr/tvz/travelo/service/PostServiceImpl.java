@@ -13,7 +13,9 @@ import hr.tvz.travelo.security.request.PostRequest;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -39,6 +41,11 @@ public class PostServiceImpl implements PostService {
        PostDTO postDTO = mapPostToDTO(savedPost);
 
        return Optional.of(postDTO);
+    }
+
+    @Override
+    public List<PostDTO> findByGroupId(Long groupId) {
+        return postRepository.findByTravelGroupId(groupId).stream().map(this::mapPostToDTO).collect(Collectors.toList());
     }
 
     private Post populateModel(PostRequest postRequest) {
