@@ -58,4 +58,17 @@ export class PostService {
       })
     )
   }
+
+  getPostsByGroupId(groupId: number){
+    const bearerToken = this.authService.getToken();
+    const options = {
+      headers: this.httpOptions.headers.set('Authorization', `Bearer ${bearerToken}`)
+    };
+
+    this.http.get<PostResponse[]>(`${this.rootUrl}/${groupId}`, options).pipe(
+      tap(posts => {
+        this.specificGroupPostsSubject.next(posts);
+      })
+    ).subscribe();
+  }
 }

@@ -64,6 +64,7 @@ export class NewPostComponent implements OnInit, OnDestroy{
         next: data => {
           this.isSuccessful = true;
           this.form.reset();
+          this.postService.getPostsByGroupId(groupId);
         },
         error: err => {
           this.errorMessage = err.error.message;

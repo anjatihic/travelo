@@ -4,6 +4,8 @@ import {Router} from "@angular/router";
 import {TravelGroupResponse} from "../model/TravelGroupResponse";
 import {UserResponse} from "../model/UserResponse";
 import {Subscription} from "rxjs";
+import {PostService} from "../service/post.service";
+import {PostResponse} from "../model/PostResponse";
 
 @Component({
   selector: 'app-travel-group-board',
@@ -15,12 +17,15 @@ export class TravelGroupBoardComponent implements OnInit, OnDestroy{
   groupId = '';
   loadedGroup: TravelGroupResponse | undefined;
   userDetails: UserResponse[] = [];
+  posts: PostResponse[] = [];
   private groupSubscription: Subscription | undefined;
   private usersSubscription: Subscription | undefined;
+  private postsSubscription: Subscription | undefined;
   newPostOpened = false;
 
   constructor(private travelGroupService: TravelGroupService,
-              private router: Router) {
+              private router: Router,
+              private postService: PostService) {
   }
   ngOnInit() {
     this.groupId = this.router.url.split('/')[2];
@@ -34,6 +39,18 @@ export class TravelGroupBoardComponent implements OnInit, OnDestroy{
         this.loadUserDetails(this.loadedGroup.usersIds);
       }
     });
+
+    this.postService.getPostsByGroupId(parseInt(this.groupId))
+
+    this.postsSubscription = this.postService.specificGroupPosts$.subscribe(
+      (posts) => {
+        this.posts = posts;
+        console.log('Loaded posts:', this.posts);
+      },
+      (error) => {
+        console.error('Error subscribing to specific group posts:', error);
+      }
+    )
   }
 
   private loadUserDetails(userIds: number[]) {
