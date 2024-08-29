@@ -32,7 +32,8 @@
           <p *ngIf="loadedGroup.tripStart == loadedGroup.tripEnd">{{loadedGroup.tripStart | date}}</p>
         </div>
 
-        <img src="assets/img/sampleTravelGroup.png" alt="cover image" class="img-fluid">
+        <img *ngIf="loadedGroup.image == ''" src="assets/img/sampleTravelGroup.png" alt="cover image" class="img-fluid">
+        <img *ngIf="loadedGroup.image != ''" [src]="loadedGroup.image" alt="cover image" class="img-fluid">
       </div>
 
       <hr>

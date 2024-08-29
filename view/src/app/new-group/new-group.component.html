@@ -1,7 +1,5 @@
 <div class="wrapper">
-  <div class="left-content">
-
-  </div>
+  <div class="left-content"></div>
   <div class="center-content">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -10,49 +8,52 @@
       </ol>
     </nav>
 
-
     <h1>Create a new group...</h1>
     <hr>
 
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()">
       <div class="input-with-label">
         <label for="groupName" class="form-label">Group name*</label>
-        <input formControlName = "name" [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"
-          type="text" class="form-control" name="groupName" id="groupName" placeholder="Type the name of your group">
+        <input [(ngModel)]="name" [ngClass]="{ 'is-invalid': submitted && !name }"
+               type="text" class="form-control" name="groupName" id="groupName" placeholder="Type the name of your group" required>
       </div>
 
       <div class="same-row">
         <div class="input-with-label">
           <label for="startDate" class="form-label">Trip start date*</label>
-          <input formControlName="tripStart" [ngClass]="{ 'is-invalid': submitted && f['tripStart'].errors }"
-            class="form-control" placeholder="yyyy-mm-dd" name="startDate" type="date" id="startDate">
+          <input [ngModel]="tripStart ? tripStart.toISOString().substring(0, 10) : ''"
+                 (ngModelChange)="onDateChange($event, true)"
+                 [ngClass]="{ 'is-invalid': submitted && !tripStart }"
+                 class="form-control" placeholder="yyyy-mm-dd" name="startDate" type="date" id="startDate" required>
         </div>
 
         <div class="input-with-label">
           <label for="endDate" class="form-label">Trip end date*</label>
-          <input formControlName="tripEnd" [ngClass]="{ 'is-invalid': submitted && f['tripEnd'].errors }"
-            class="form-control" placeholder="yyyy-mm-dd" name="endDate" type="date" id="endDate">
+          <input [ngModel]="tripEnd ? tripEnd.toISOString().substring(0, 10) : ''"
+                 (ngModelChange)="onDateChange($event, false)"
+                 [ngClass]="{ 'is-invalid': submitted && !tripEnd }"
+                 class="form-control" placeholder="yyyy-mm-dd" name="endDate" type="date" id="endDate" required>
         </div>
       </div>
 
       <div class="input-with-label">
         <label for="groupDescription" class="form-label">Description</label>
-        <textarea formControlName="description"
-          class="form-control" placeholder="Add a trip description" id="groupDescription" name="groupDescription"></textarea>
+        <textarea [(ngModel)]="description"
+                  class="form-control" placeholder="Add a trip description" id="groupDescription" name="groupDescription"></textarea>
       </div>
 
       <div class="same-row">
         <div class="input-with-label">
           <label for="coverImageUrl" class="form-label">Cover image</label>
-          <input formControlName="coverImage" [ngClass]="{ 'is-invalid': submitted && f['coverImage'].errors }"
-            type="url" class="form-control" placeholder="Insert cover image URL" id="coverImageUrl" name="coverImageUrl"
-          (change)="onUrlChange()">
+          <input [(ngModel)]="image" [ngClass]="{ 'is-invalid': submitted && !isValidUrl(image) }"
+                 type="url" class="form-control" placeholder="Insert cover image URL" id="coverImageUrl" name="coverImageUrl"
+                 (change)="onUrlChange()">
         </div>
-        <div *ngIf="isValidUrl(f['coverImage'].value)">
-          <img [src]="f['coverImage'].value" alt="cover image" class="img-fluid">
+        <div *ngIf="isValidUrl(image)">
+          <img [src]="image" alt="cover image" class="img-fluid">
         </div>
 
-        <div *ngIf="!isValidUrl(f['coverImage'].value) || f['coverImage'].value == ''">
+        <div *ngIf="!isValidUrl(image) || image === ''">
           <img src="assets/img/fallbackImage.png" alt="Fallback image" class="img-fluid">
         </div>
       </div>
@@ -64,7 +65,5 @@
     </form>
   </div>
 
-  <div class="right-content">
-
-  </div>
+  <div class="right-content"></div>
 </div>

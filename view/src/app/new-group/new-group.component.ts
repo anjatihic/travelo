@@ -1,87 +1,76 @@
-import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {TravelGroupService} from "../service/travel-group.service";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { TravelGroupService } from "../service/travel-group.service";
 
 @Component({
   selector: 'app-new-group',
   templateUrl: './new-group.component.html',
-  styleUrl: './new-group.component.css'
+  styleUrls: ['./new-group.component.css']
 })
-export class NewGroupComponent implements OnInit{
+export class NewGroupComponent implements OnInit {
   imageUrl: string = '';
 
-  form: FormGroup = new FormGroup({
-    name: new FormControl(''),
-    tripStart: new FormControl(''),
-    tripEnd: new FormControl(''),
-    description: new FormControl(''),
-    coverImage: new FormControl('')
-  });
+  // Properties for ngModel
+  name: string = '';
+  tripStart: Date | null = null;
+  tripEnd: Date | null = null;
+  description: string = '';
+  image: string = '';
 
   submitted = false;
   isSuccessful = false;
   isSubmitFailed = false;
-  errorMessage = false;
+  errorMessage = '';
 
-  constructor(private formBuilder: FormBuilder,
-              private router: Router,
-              private travelGroupService: TravelGroupService) {
-  }
+  constructor(private router: Router, private travelGroupService: TravelGroupService) {}
 
-  ngOnInit() {
-    this.form = this.formBuilder.group(
-      {
-        name: ['', Validators.required],
-        tripStart: ['', Validators.required],
-        tripEnd: ['', Validators.required, Validators],
-        description: [''],
-        coverImage: ['']
-      }
-    )
-  }
-
-  get f(): { [key: string]: AbstractControl} {
-    return this.form.controls
-  }
+  ngOnInit(): void {}
 
   onSubmit(): void {
     this.submitted = true;
 
-    if(this.form.invalid) {
+    if (!this.name || !this.tripStart || !this.tripEnd) {
       return;
     }
 
-    const {name, tripStart, tripEnd, description, coverImage} = this.form.value;
+    const { name, tripStart, tripEnd, description, image } = this;
 
-    this.travelGroupService.createNewTravelGroup({name, tripStart, tripEnd, description, coverImage}).subscribe({
+    this.travelGroupService.createNewTravelGroup({ name, tripStart, tripEnd, description, image }).subscribe({
       next: data => {
         this.isSuccessful = true;
-        this.router.navigate(['/travelGroup/' + data.id])
+        this.router.navigate(['/travelGroup/' + data.id]);
       },
       error: err => {
         this.errorMessage = err.error.message;
         this.isSubmitFailed = true;
       }
-    })
-
-    //call travel service
+    });
   }
 
-  onUrlChange() {
-    if(this.isValidUrl(this.imageUrl)) {
+  onUrlChange(): void {
+    if (this.isValidUrl(this.imageUrl)) {
       console.log('Valid URL: ', this.imageUrl);
-    }else {
-      console.log('Invalid URL: ', this.imageUrl)
+    } else {
+      console.log('Invalid URL: ', this.imageUrl);
     }
   }
 
   isValidUrl(url: string): boolean {
-    try{
-      new URL(url)
+    try {
+      new URL(url);
       return true;
     } catch (_) {
       return false;
+    }
+  }
+
+  // Method to handle date input changes
+  onDateChange(dateString: string, isStart: boolean): void {
+    const date = dateString ? new Date(dateString) : null;
+    if (isStart) {
+      this.tripStart = date;
+    } else {
+      this.tripEnd = date;
     }
   }
 }

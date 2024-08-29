@@ -38,7 +38,7 @@ export class TravelGroupService {
 
   }
 
-  createNewTravelGroup(groupInfo: {name: string, tripStart: Date, tripEnd: Date, description: string, coverImage: string}):
+  createNewTravelGroup(groupInfo: {name: string, tripStart: Date, tripEnd: Date, description: string, image: string}):
     Observable<TravelGroupResponse> {
     const bearerToken = this.authService.getToken();
     const userId = this.authService.getUserId();
