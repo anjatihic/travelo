@@ -17,8 +17,10 @@ export class CommentsComponent implements OnInit{
 
   ngOnInit() {
     if(this.postId){
-      this.commentService.loadCommentsByPostId(this.postId).subscribe(
-        response => {
+      this.commentService.loadCommentsByPostId(this.postId);
+
+      this.commentService.comments$.subscribe(
+        (response) => {
           this.comments = response;
         },
         (error) => {

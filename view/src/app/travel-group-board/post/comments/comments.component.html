@@ -1,6 +1,6 @@
 <ul class="list-group list-group-flush">
   <li *ngFor="let comment of comments" class="list-group-item">
-    {{comment.content}}
+    <app-comment-body [comment]="comment"></app-comment-body>
   </li>
-  <app-new-comment></app-new-comment>
+  <app-new-comment [postId]="postId"></app-new-comment>
 </ul>
